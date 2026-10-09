@@ -1,0 +1,263 @@
+{
+ "key": "cc7d7d15c28a8792",
+ "spec": {
+  "algo": "ppo",
+  "train": {
+   "critical_sla": 50.0,
+   "analytics_sla": 90.0,
+   "critical_prob": 0.5,
+   "drain_prob": 0.6,
+   "arrival_rate": 1.2,
+   "critical_penalty": 10.0,
+   "analytics_penalty": 2.0,
+   "flat": false,
+   "max_steps": 200
+  },
+  "eval": {
+   "critical_sla": 50.0,
+   "analytics_sla": 90.0,
+   "critical_prob": 0.5,
+   "drain_prob": 0.6,
+   "arrival_rate": 1.2,
+   "critical_penalty": 10.0,
+   "analytics_penalty": 2.0,
+   "flat": false,
+   "max_steps": 200
+  },
+  "seed": 2,
+  "timesteps": 100000,
+  "algo_kwargs": {},
+  "curve_every": 5000
+ },
+ "exact": {
+  "class_0_violation_rate": 0.03533080147761259,
+  "class_0_avg_latency": 37.88474235977342,
+  "class_1_violation_rate": 0.12853022063663735,
+  "class_1_avg_latency": 43.94270460511002,
+  "overall_violation_rate": 0.08193051105712497,
+  "sla_cost_per_task": 0.3051842280247003,
+  "edge_utilization": 0.9180694889428745
+ },
+ "mc": {
+  "class_0_violation_rate": 0.03729185362448898,
+  "class_0_avg_latency": 38.20620201415894,
+  "class_1_violation_rate": 0.13739845552101093,
+  "class_1_avg_latency": 44.56774646474777,
+  "overall_violation_rate": 0.0872,
+  "sla_cost_per_task": 0.32385772364345583,
+  "edge_utilization": 0.9128
+ },
+ "curve": [
+  {
+   "timesteps": 5000,
+   "class_0_violation_rate": 0.5160407204531381,
+   "class_0_avg_latency": 60.25555231497594,
+   "class_1_violation_rate": 0.13642897346343572,
+   "class_1_avg_latency": 61.51992517568751,
+   "overall_violation_rate": 0.3262348469582869,
+   "sla_cost_per_task": 2.7166325757291263,
+   "edge_utilization": 1.0
+  },
+  {
+   "timesteps": 10000,
+   "class_0_violation_rate": 0.338507663673763,
+   "class_0_avg_latency": 47.238494863075005,
+   "class_1_violation_rate": 0.055689971481795324,
+   "class_1_avg_latency": 48.478373398768774,
+   "overall_violation_rate": 0.19709881757777917,
+   "sla_cost_per_task": 1.7482282898506103,
+   "edge_utilization": 0.9616136511841542
+  },
+  {
+   "timesteps": 15000,
+   "class_0_violation_rate": 0.16539715742526595,
+   "class_0_avg_latency": 42.04010045783106,
+   "class_1_violation_rate": 0.08603924803020079,
+   "class_1_avg_latency": 45.165690835594425,
+   "overall_violation_rate": 0.12571820272773337,
+   "sla_cost_per_task": 0.9130250351565306,
+   "edge_utilization": 0.945592425845782
+  },
+  {
+   "timesteps": 20000,
+   "class_0_violation_rate": 0.08209780878729007,
+   "class_0_avg_latency": 39.97155896317248,
+   "class_1_violation_rate": 0.1098496319867721,
+   "class_1_avg_latency": 44.2770937904252,
+   "overall_violation_rate": 0.0959737203870311,
+   "sla_cost_per_task": 0.5203386759232225,
+   "edge_utilization": 0.9290429428047413
+  },
+  {
+   "timesteps": 25000,
+   "class_0_violation_rate": 0.06846296152234205,
+   "class_0_avg_latency": 39.302234044928994,
+   "class_1_violation_rate": 0.12299842839469312,
+   "class_1_avg_latency": 44.59356333019159,
+   "overall_violation_rate": 0.09573069495851758,
+   "sla_cost_per_task": 0.46531323600640334,
+   "edge_utilization": 0.9217345444270794
+  },
+  {
+   "timesteps": 30000,
+   "class_0_violation_rate": 0.07458239673821987,
+   "class_0_avg_latency": 39.21194948827316,
+   "class_1_violation_rate": 0.12004504953263596,
+   "class_1_avg_latency": 44.59469493138922,
+   "overall_violation_rate": 0.09731372313542792,
+   "sla_cost_per_task": 0.4929570332237353,
+   "edge_utilization": 0.9269630069793621
+  },
+  {
+   "timesteps": 35000,
+   "class_0_violation_rate": 0.057606929157309875,
+   "class_0_avg_latency": 39.11238163747762,
+   "class_1_violation_rate": 0.12027327200650882,
+   "class_1_avg_latency": 44.17030191662538,
+   "overall_violation_rate": 0.08894010058190935,
+   "sla_cost_per_task": 0.4083079177930582,
+   "edge_utilization": 0.9209059793575889
+  },
+  {
+   "timesteps": 40000,
+   "class_0_violation_rate": 0.07517847781492132,
+   "class_0_avg_latency": 39.32376296267227,
+   "class_1_violation_rate": 0.11298293998828,
+   "class_1_avg_latency": 44.24372420042845,
+   "overall_violation_rate": 0.09408070890160067,
+   "sla_cost_per_task": 0.4888753290628866,
+   "edge_utilization": 0.9305460030632777
+  },
+  {
+   "timesteps": 45000,
+   "class_0_violation_rate": 0.05337726929910224,
+   "class_0_avg_latency": 38.847572686350965,
+   "class_1_violation_rate": 0.11498827892905947,
+   "class_1_avg_latency": 43.76210243205901,
+   "overall_violation_rate": 0.08418277411408086,
+   "sla_cost_per_task": 0.3818746254245706,
+   "edge_utilization": 0.9249153670835268
+  },
+  {
+   "timesteps": 50000,
+   "class_0_violation_rate": 0.03822236018860645,
+   "class_0_avg_latency": 38.234717167194624,
+   "class_1_violation_rate": 0.12234735151273118,
+   "class_1_avg_latency": 43.70284160326281,
+   "overall_violation_rate": 0.08028485585066882,
+   "sla_cost_per_task": 0.3134591524557634,
+   "edge_utilization": 0.91971514414933
+  },
+  {
+   "timesteps": 55000,
+   "class_0_violation_rate": 0.0398225394019275,
+   "class_0_avg_latency": 38.42676835181996,
+   "class_1_violation_rate": 0.11890123563619318,
+   "class_1_avg_latency": 43.566883607047274,
+   "overall_violation_rate": 0.07936188751906034,
+   "sla_cost_per_task": 0.31801393264583067,
+   "edge_utilization": 0.9206381124809385
+  },
+  {
+   "timesteps": 60000,
+   "class_0_violation_rate": 0.037454568972918476,
+   "class_0_avg_latency": 38.143331894213695,
+   "class_1_violation_rate": 0.12394092213341644,
+   "class_1_avg_latency": 43.7649448496461,
+   "overall_violation_rate": 0.08069774555316746,
+   "sla_cost_per_task": 0.31121376699800885,
+   "edge_utilization": 0.9193022544468309
+  },
+  {
+   "timesteps": 65000,
+   "class_0_violation_rate": 0.035332285467279276,
+   "class_0_avg_latency": 37.88487825789081,
+   "class_1_violation_rate": 0.1285282977854311,
+   "class_1_avg_latency": 43.94261905857076,
+   "overall_violation_rate": 0.08193029162635518,
+   "sla_cost_per_task": 0.3051897251218275,
+   "edge_utilization": 0.9180697083736433
+  },
+  {
+   "timesteps": 70000,
+   "class_0_violation_rate": 0.03888360507637987,
+   "class_0_avg_latency": 38.31433267226104,
+   "class_1_violation_rate": 0.12093886763786274,
+   "class_1_avg_latency": 43.647924738757496,
+   "overall_violation_rate": 0.07991123635712132,
+   "sla_cost_per_task": 0.3153568930197621,
+   "edge_utilization": 0.9200887636428776
+  },
+  {
+   "timesteps": 75000,
+   "class_0_violation_rate": 0.03533228546727928,
+   "class_0_avg_latency": 37.88487825789081,
+   "class_1_violation_rate": 0.1285282977854311,
+   "class_1_avg_latency": 43.94261905857076,
+   "overall_violation_rate": 0.08193029162635518,
+   "sla_cost_per_task": 0.3051897251218275,
+   "edge_utilization": 0.9180697083736434
+  },
+  {
+   "timesteps": 80000,
+   "class_0_violation_rate": 0.03533228546727928,
+   "class_0_avg_latency": 37.88487825789081,
+   "class_1_violation_rate": 0.1285282977854311,
+   "class_1_avg_latency": 43.94261905857076,
+   "overall_violation_rate": 0.08193029162635518,
+   "sla_cost_per_task": 0.3051897251218275,
+   "edge_utilization": 0.9180697083736434
+  },
+  {
+   "timesteps": 85000,
+   "class_0_violation_rate": 0.036367222118959985,
+   "class_0_avg_latency": 38.008292804762036,
+   "class_1_violation_rate": 0.12634922380697358,
+   "class_1_avg_latency": 43.857122914483,
+   "overall_violation_rate": 0.08135822296296678,
+   "sla_cost_per_task": 0.30818533440177354,
+   "edge_utilization": 0.9186417770370318
+  },
+  {
+   "timesteps": 90000,
+   "class_0_violation_rate": 0.03533137603632828,
+   "class_0_avg_latency": 37.88479519625815,
+   "class_1_violation_rate": 0.12852951698154505,
+   "class_1_avg_latency": 43.94267435769722,
+   "overall_violation_rate": 0.08193044650893666,
+   "sla_cost_per_task": 0.3051863971631864,
+   "edge_utilization": 0.9180695534910626
+  },
+  {
+   "timesteps": 95000,
+   "class_0_violation_rate": 0.033000843231591775,
+   "class_0_avg_latency": 37.60809900806274,
+   "class_1_violation_rate": 0.13424858966385994,
+   "class_1_avg_latency": 44.18920252616019,
+   "overall_violation_rate": 0.08362471644772584,
+   "sla_cost_per_task": 0.2992528058218188,
+   "edge_utilization": 0.9163752835522739
+  },
+  {
+   "timesteps": 100000,
+   "class_0_violation_rate": 0.03429329878946093,
+   "class_0_avg_latency": 37.762293377251716,
+   "class_1_violation_rate": 0.13152735982554772,
+   "class_1_avg_latency": 44.08250734459737,
+   "overall_violation_rate": 0.08291032930750433,
+   "sla_cost_per_task": 0.3029938537728524,
+   "edge_utilization": 0.9170896706924961
+  }
+ ],
+ "train_seconds": 131.19919443130493,
+ "timesteps_done": 100352,
+ "wall_seconds": 138.9323287010193,
+ "versions": {
+  "python": "3.13.16",
+  "numpy": "2.4.4",
+  "gymnasium": "1.3.0",
+  "stable_baselines3": "2.9.0",
+  "torch": "2.14.0+cu130",
+  "platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39"
+ }
+}

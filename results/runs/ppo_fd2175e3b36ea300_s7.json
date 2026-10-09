@@ -1,0 +1,62 @@
+{
+ "key": "fd2175e3b36ea300",
+ "spec": {
+  "algo": "ppo",
+  "train": {
+   "critical_sla": 50.0,
+   "analytics_sla": 90.0,
+   "critical_prob": 0.5,
+   "drain_prob": 0.6,
+   "arrival_rate": 1.2,
+   "critical_penalty": 6.0,
+   "analytics_penalty": 6.0,
+   "flat": false,
+   "max_steps": 200
+  },
+  "eval": {
+   "critical_sla": 50.0,
+   "analytics_sla": 90.0,
+   "critical_prob": 0.5,
+   "drain_prob": 0.6,
+   "arrival_rate": 1.2,
+   "critical_penalty": 10.0,
+   "analytics_penalty": 2.0,
+   "flat": false,
+   "max_steps": 200
+  },
+  "seed": 7,
+  "timesteps": 20000,
+  "algo_kwargs": {},
+  "curve_every": 0
+ },
+ "exact": {
+  "class_0_violation_rate": 0.12109909767526633,
+  "class_0_avg_latency": 45.07163696307843,
+  "class_1_violation_rate": 0.009340375974140391,
+  "class_1_avg_latency": 40.804508741862676,
+  "overall_violation_rate": 0.06521973682470335,
+  "sla_cost_per_task": 0.6148358643504721,
+  "edge_utilization": 0.9434143863646574
+ },
+ "mc": {
+  "class_0_violation_rate": 0.13281483697277893,
+  "class_0_avg_latency": 45.86200019942168,
+  "class_1_violation_rate": 0.010731120248721292,
+  "class_1_avg_latency": 41.274696620198576,
+  "overall_violation_rate": 0.07195,
+  "sla_cost_per_task": 0.6748053051126159,
+  "edge_utilization": 0.93895
+ },
+ "curve": null,
+ "train_seconds": 22.194698572158813,
+ "timesteps_done": 20480,
+ "wall_seconds": 30.03264546394348,
+ "versions": {
+  "python": "3.13.16",
+  "numpy": "2.4.4",
+  "gymnasium": "1.3.0",
+  "stable_baselines3": "2.9.0",
+  "torch": "2.14.0+cu130",
+  "platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39"
+ }
+}
