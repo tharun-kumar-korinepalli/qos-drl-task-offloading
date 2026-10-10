@@ -1,0 +1,113 @@
+{
+ "key": "9a6ef1041c368f46",
+ "spec": {
+  "algo": "ppo",
+  "sys": {
+   "base_ms": [
+    30.0,
+    30.0
+   ],
+   "slope_ms": [
+    20.0,
+    20.0
+   ],
+   "drain": [
+    0.6,
+    0.6
+   ],
+   "cap": 8,
+   "class_probs": [
+    0.5,
+    0.5
+   ],
+   "limits_ms": [
+    50.0,
+    90.0
+   ],
+   "eval_weights": [
+    10.0,
+    2.0
+   ],
+   "cloud_ms": 110.0,
+   "cloud_meet": [
+    0.0,
+    0.0
+   ],
+   "background": 0.2,
+   "background_mode": "deterministic",
+   "max_steps": 200
+  },
+  "reward": {
+   "kind": "flat",
+   "penalties": [
+    10.0,
+    2.0
+   ],
+   "success": 1.0,
+   "cloud_cost": 0.1,
+   "scale": 1.0,
+   "target": [],
+   "eta": 0.0,
+   "window": 200
+  },
+  "seed": 0,
+  "timesteps": 25000,
+  "algo_kwargs": {
+   "batch_size": 128,
+   "ent_coef": 0.0,
+   "gamma": 0.99,
+   "learning_rate": 0.001,
+   "n_steps": 1024,
+   "net_arch": [
+    128,
+    128
+   ]
+  },
+  "curve_every": 0,
+  "svrs": false,
+  "prune": false,
+  "init_from": "ppo_4972dbf5bdd04c89_s0.zip"
+ },
+ "tag": "ft slower tasks (+5 ms per queued task) flat",
+ "train_seconds": 29.140880823135376,
+ "timesteps_done": 125952,
+ "curve": [],
+ "versions": {
+  "python": "3.13.16",
+  "numpy": "2.4.4",
+  "gymnasium": "1.3.0",
+  "stable_baselines3": "2.9.0",
+  "torch": "2.14.0+cu130",
+  "platform": "Linux-6.18.44-fc-v114-x86_64-with-glibc2.39"
+ },
+ "exact": {
+  "miss": [
+   0.11559612409775599,
+   0.005480157531205298
+  ],
+  "latency": [
+   47.21745223595558,
+   42.680034428190346
+  ],
+  "overall": 0.06053814081448064,
+  "cost": 0.5834607780199853,
+  "edge": 0.9394618591855189
+ },
+ "expected_return": 114.03584004343753,
+ "mc": {
+  "miss": [
+   0.12374115066307707,
+   0.00712064988466553
+  ],
+  "cost": 0.6258264032000509,
+  "edge": 0.9344,
+  "overall": 0.0656,
+  "episodes": 100,
+  "cost_se": 0.02635489567496726
+ },
+ "final_penalties": [
+  6.0,
+  6.0
+ ],
+ "wall_seconds": 38.81583547592163
+}

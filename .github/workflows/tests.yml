@@ -16,7 +16,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - run: pip install torch --index-url https://download.pytorch.org/whl/cpu
-      - run: pip install numpy gymnasium stable-baselines3 scipy matplotlib pytest
+      - run: pip install numpy gymnasium stable-baselines3 sb3-contrib scipy matplotlib pytest
       - run: pip install -e .
       - run: pytest -q
       - run: python experiments/01_sanity_check.py

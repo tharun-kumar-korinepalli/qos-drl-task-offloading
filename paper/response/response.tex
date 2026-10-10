@@ -1,0 +1,69 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=2.3cm]{geometry}
+\usepackage{mathptmx}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\newcommand{\obj}[2]{\par\medskip\textbf{#1.} \emph{#2}\par}
+\begin{document}
+
+\begin{center}
+{\Large Revision notes and response to reviewer objections}\\[4pt]
+Class-Weighted Rewards for SLA-Differentiated Task Offloading in the IoT Edge-Cloud Continuum:\\
+Deep Reinforcement Learning Against an Exact Optimum\\[4pt]
+S. Golla and T. K. Korine Palli
+\end{center}
+
+Before submission, the first journal draft was reviewed internally in the way an experienced IEEE reviewer would review it. This document lists every objection that was raised and says what the revision does about it. Section, table and figure numbers refer to the revised paper. Every number below comes from the result files of the open repository.
+
+\section*{Major objections}
+
+\obj{M1}{The system is tiny. If DP solves it exactly, why use deep RL at all?}
+The revision adds three larger systems with three and four heterogeneous edge nodes, two and three task classes, random background traffic and a cloud that meets the analytics limit only by chance (Table II). DP still solves them exactly, up to 3.9 million states. Table III shows the cost of the exact solution: each extra edge node multiplies the stored transitions by 14 to 24, and five nodes need 23.6 million states. The paper now states plainly when each tool is the right one (Section VIII-B). If the model is known and small, DP is best. A learned agent is useful when the latency model is unknown or the system is too large for the exact model. The exact benchmark is what lets the paper measure how much a learner gives up.
+
+\obj{M2}{A tuned reservation rule beats every agent.}
+After fair tuning and 100,000 steps, PPO with the weighted reward is 10\% above the optimum in the nominal system and beats the reservation rule tuned on the exact model in 9 of 10 seeds (sign test, $p=0.021$). The revision also adds a stronger rule family that chooses node sets per class, and reports honestly that in the three larger systems the agents are 36\% to 67\% above the optimum. They beat the simple reservation rule in two systems, but the node-set rule tuned on the exact model is better than every agent in all three (Table X, Fig. 5).
+
+\obj{M3}{A2C fails and DQN diverges. Is this a fair test of the algorithms?}
+Every algorithm now gets the same tuning budget: six configurations, both rewards, two separate seeds and 50,000 steps, chosen by the exact expected return under the agent's own reward and never by the SLA cost (Table VI). The same setting was chosen for both rewards for every algorithm, so tuning cannot explain the reward effect. DQN chose the scaled rewards and is now stable, at 0.339 for the weighted reward. A2C now learns, but stays far from the optimum.
+
+\obj{M4}{There is no comparison with a published method.}
+The class-blind reward with the class in the state is the design of Nieto et al. The tiered, adaptive penalties of Yamsani and Chenna Reddy are rebuilt in the same simulator together with their risk features and action pruning, with two step sizes and an ablation without features and pruning (Section VI-C). The full design reaches an SLA cost of 0.368 to 0.418, which is 41\% to 60\% above the optimum. It is better than the class-blind reward in every seed and worse than the fixed weighted reward in every seed. The reason is shown in Section VII-C: its targets of 5\% cannot all be met, so both penalties grow and their effective ratio falls from 5:1 to about 2:1 (Table IX).
+
+\obj{M5}{The SLA cost uses the same weights as the reward, so the comparison is circular.}
+Proposition 1 shows that the weighted reward does not optimize the SLA cost exactly, because the bonus for a met limit shifts every penalty. Table V sweeps the operator's weight ratio from 1 to 50 and gives the exact distance of every reward to the optimum for each ratio. The per-class miss rates and the Pareto frontier remain in the paper.
+
+\obj{M6}{Why is the weighted reward 1\% from the optimum and not at it?}
+Proposition 1 and Eq. (8) answer this. The penalties 10 and 2 act as 11 and 3. The corrected penalties of 10.67 and 1.33 reach the optimum exactly, and in the larger systems the corrected reward is within 0.13\% of the optimum, where the weighted reward is up to 10.4\% above the optimum (Table IV). The corrected reward is trained as a third reward. For PPO it does not differ significantly from the weighted reward after training, which the paper reports.
+
+\obj{M7}{A cloud that always misses is not a real offloading choice.}
+In the larger systems the cloud meets the 90\,ms or 110\,ms limit with probability 0.5 or 0.6, and the 70\,ms limit with probability 0.2. One change of the nominal system also lets the cloud meet the analytics limit with probability 0.5.
+
+\obj{M8}{Deterministic background traffic and a linear latency model are unrealistic.}
+All larger systems use random background arrivals, and random background is one of the changes of the nominal system. Real traces were not available, which the threats to validity state.
+
+\obj{M9}{20,000 steps is an arbitrary budget.}
+The main study now uses 100,000 steps and 200,000 in the largest system, with exact learning curves every 5,000 steps over 10 seeds (Fig. 4). The 20,000-step results stay as a low-budget view.
+
+\obj{M10}{Rules and agents are only tested on the system they were built for.}
+Five changes of the nominal system are scored exactly (Section VII-E). Rules keep their nominal model and threshold and agents keep their nominal policy, then rules are tuned again and agents are fine-tuned for 25,000 steps from interaction alone (Table XI, Fig. 6). The reservation rule loses nothing in these cases, because re-tuning picks the same threshold, and it stays 6\% to 16\% above the new optimum. Weighted PPO stays 4\% to 22\% above it without new training, beats the unchanged rule under two of the five changes, and fine-tuning moves it by at most 3 points.
+
+\section*{Minor objections}
+
+\obj{m1}{The learners use a discount of 0.99, the objective is undiscounted.}
+Table IV gives the exact DP policy of every reward with $\gamma = 0.99$. The corrected reward stays within 0.8\% of the optimum in three systems and 4.1\% in Large4-3C.
+
+\obj{m2}{Learning curves used 5 seeds.}
+All curves and main comparisons now use 10 seeds. Only the learning-rate sweep of the short-budget section keeps 5 seeds.
+
+\obj{m3}{Does the agent need the time feature?}
+In the systems with random background, the optimal policy of the middle step used for the whole episode is only 1.8\% to 4.4\% above the optimum, so the time feature matters mainly near the end of an episode. In the nominal system the background schedule depends on time, so the feature is needed.
+
+\obj{m4}{Exact evaluation of a neural network could hide bugs.}
+The test suite checks the general model against the simulator, against the earlier two-node model to $10^{-12}$, and the expected return against simulation. Every agent is also simulated on 100 held-out episodes.
+
+\obj{m5}{Some comparisons used 5 seeds and weak statistics.}
+All main comparisons use 10 seeds, two-sided Mann-Whitney tests with Holm correction within each table, Vargha-Delaney effect sizes and sign tests against rules.
+
+\end{document}

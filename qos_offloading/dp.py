@@ -62,14 +62,14 @@ class ExactModel:
         cost[:, C.CLOUD, :] += cloud_cost
         return cost
 
-    def solve(self, cost):
+    def solve(self, cost, gamma=1.0):
         T, S = self.T, self.S
         policy = np.zeros((T, S, 2), dtype=int)
         V = np.zeros((S, 2))
         for t in range(T - 1, -1, -1):
             W = V @ self.class_prob
             Pt = self.P[self.sched[t]]
-            Qv = cost + np.stack([Pt[a] @ W for a in range(C.NUM_ACTIONS)], axis=1)[:, :, None]
+            Qv = cost + gamma * np.stack([Pt[a] @ W for a in range(C.NUM_ACTIONS)], axis=1)[:, :, None]
             policy[t] = np.argmin(Qv, axis=1)
             V = np.min(Qv, axis=1)
         return policy, float(V[0] @ self.class_prob)

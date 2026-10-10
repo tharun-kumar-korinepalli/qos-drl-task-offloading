@@ -142,6 +142,7 @@ def errbar(ax, x, d, key, col, mk, label, mfc=None):
 
 def fig_sweeps(res):
     fig, axs = plt.subplots(1, 3, figsize=(COL2, 1.75))
+    fig.subplots_adjust(bottom=0.3)
     rows = res["penalty"]["rows"]
     x = np.arange(len(rows))
     errbar(axs[0], x, rows, "class_0_violation_rate", CRIT, "o", "critical, PPO")
@@ -155,7 +156,7 @@ def fig_sweeps(res):
     axs[0].set_xlabel("penalty critical : analytics (mean 6)")
     axs[0].set_ylabel("tasks missed (%)")
     axs[0].set_title("(a) Penalty ratio", fontsize=7)
-    axs[0].legend(fontsize=5.5, ncol=2, loc="upper center", columnspacing=0.8)
+    axs[0].legend(fontsize=5.5, ncol=2, loc="upper center", bbox_to_anchor=(0.5, -0.36), columnspacing=0.8)
     axs[0].set_ylim(0, 27)
 
     rows = res["load"]["rows"]
@@ -175,7 +176,7 @@ def fig_sweeps(res):
     axs[1].set_xlabel("offered edge load $\\rho$")
     axs[1].set_ylabel("SLA cost per task")
     axs[1].set_title("(b) Edge load", fontsize=7)
-    axs[1].legend(fontsize=5.5, loc="upper left")
+    axs[1].legend(fontsize=5.5, loc="upper center", bbox_to_anchor=(0.5, -0.36), ncol=2, columnspacing=0.8)
 
     rows = res["mix"]["rows"]
     xs = [100 * r["critical_prob"] for r in rows]
@@ -192,7 +193,7 @@ def fig_sweeps(res):
     axs[2].set_xlabel("share of critical tasks (%)")
     axs[2].set_ylabel("critical tasks missed (%)")
     axs[2].set_title("(c) Class mix", fontsize=7)
-    axs[2].legend(fontsize=5.5, loc="upper right", ncol=2, columnspacing=0.8)
+    axs[2].legend(fontsize=5.5, loc="upper center", bbox_to_anchor=(0.5, -0.36), ncol=2, columnspacing=0.8)
     axs[2].set_ylim(0, 40)
     for ax in axs:
         clean(ax)

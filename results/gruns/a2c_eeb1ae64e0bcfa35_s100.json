@@ -1,0 +1,113 @@
+{
+ "key": "eeb1ae64e0bcfa35",
+ "spec": {
+  "algo": "a2c",
+  "sys": {
+   "base_ms": [
+    30.0,
+    30.0
+   ],
+   "slope_ms": [
+    15.0,
+    15.0
+   ],
+   "drain": [
+    0.6,
+    0.6
+   ],
+   "cap": 8,
+   "class_probs": [
+    0.5,
+    0.5
+   ],
+   "limits_ms": [
+    50.0,
+    90.0
+   ],
+   "eval_weights": [
+    10.0,
+    2.0
+   ],
+   "cloud_ms": 110.0,
+   "cloud_meet": [
+    0.0,
+    0.0
+   ],
+   "background": 0.2,
+   "background_mode": "deterministic",
+   "max_steps": 200
+  },
+  "reward": {
+   "kind": "weighted",
+   "penalties": [
+    10.0,
+    2.0
+   ],
+   "success": 1.0,
+   "cloud_cost": 0.1,
+   "scale": 1.0,
+   "target": [],
+   "eta": 0.0,
+   "window": 200
+  },
+  "seed": 100,
+  "timesteps": 50000,
+  "algo_kwargs": {
+   "ent_coef": 0.0,
+   "gamma": 0.999,
+   "learning_rate": 0.001,
+   "n_steps": 5,
+   "net_arch": [
+    128,
+    128
+   ],
+   "normalize_advantage": false
+  },
+  "curve_every": 0,
+  "svrs": false,
+  "prune": false,
+  "init_from": ""
+ },
+ "tag": "tune a2c cfg5 weighted",
+ "train_seconds": 103.86554408073425,
+ "timesteps_done": 50000,
+ "curve": [],
+ "versions": {
+  "python": "3.13.16",
+  "numpy": "2.4.4",
+  "gymnasium": "1.3.0",
+  "stable_baselines3": "2.9.0",
+  "torch": "2.14.0+cu130",
+  "platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39"
+ },
+ "exact": {
+  "miss": [
+   0.09985712849032642,
+   0.022800725718374274
+  ],
+  "latency": [
+   44.04534618854425,
+   40.40797973740334
+  ],
+  "overall": 0.06132892710435035,
+  "cost": 0.5220863681700064,
+  "edge": 0.9404091407046852
+ },
+ "expected_return": 82.12512375922242,
+ "mc": {
+  "miss": [
+   0.1073885731379001,
+   0.025875037609066294
+  ],
+  "cost": 0.5628179032985667,
+  "edge": 0.93595,
+  "overall": 0.06675,
+  "episodes": 100,
+  "cost_se": 0.02555091049380025
+ },
+ "final_penalties": [
+  10.0,
+  2.0
+ ],
+ "wall_seconds": 116.61002922058105
+}

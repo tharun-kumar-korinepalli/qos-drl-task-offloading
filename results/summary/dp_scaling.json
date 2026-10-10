@@ -1,0 +1,46 @@
+[
+ {
+  "edge_nodes": 2,
+  "states": 32400,
+  "queue_states": 81,
+  "transition_entries": 1376,
+  "build_s": 0.003064870834350586,
+  "solve_s": 0.01788043975830078,
+  "evaluate_s": 0.015398740768432617,
+  "peak_rss_mb": 51.2265625,
+  "cost": 0.3414747874248863
+ },
+ {
+  "edge_nodes": 3,
+  "states": 291600,
+  "queue_states": 729,
+  "transition_entries": 32050,
+  "build_s": 0.006569385528564453,
+  "solve_s": 0.19095063209533691,
+  "evaluate_s": 0.08461689949035645,
+  "peak_rss_mb": 52.7265625,
+  "cost": 0.26293036629215916
+ },
+ {
+  "edge_nodes": 4,
+  "states": 2624400,
+  "queue_states": 6561,
+  "transition_entries": 775900,
+  "build_s": 0.222944974899292,
+  "solve_s": 1.2132229804992676,
+  "evaluate_s": 0.5851848125457764,
+  "peak_rss_mb": 83.0546875,
+  "cost": 0.24452124506482992
+ },
+ {
+  "edge_nodes": 5,
+  "states": 23619600,
+  "queue_states": 59049,
+  "transition_entries": 11302060,
+  "build_s": 2.8242380619049072,
+  "solve_s": 15.707711935043335,
+  "evaluate_s": 25.892496347427368,
+  "peak_rss_mb": 477.48046875,
+  "cost": 0.1730586278464132
+ }
+]

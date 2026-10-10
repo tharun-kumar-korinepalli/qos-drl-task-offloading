@@ -1,0 +1,103 @@
+{
+ "key": "fc12256e82183dbf",
+ "spec": {
+  "algo": "dqn",
+  "sys": {
+   "base_ms": [
+    30.0,
+    30.0
+   ],
+   "slope_ms": [
+    15.0,
+    15.0
+   ],
+   "drain": [
+    0.6,
+    0.6
+   ],
+   "cap": 8,
+   "class_probs": [
+    0.5,
+    0.5
+   ],
+   "limits_ms": [
+    50.0,
+    90.0
+   ],
+   "eval_weights": [
+    10.0,
+    2.0
+   ],
+   "cloud_ms": 110.0,
+   "cloud_meet": [
+    0.0,
+    0.0
+   ],
+   "background": 0.2,
+   "background_mode": "deterministic",
+   "max_steps": 200
+  },
+  "reward": {
+   "kind": "weighted",
+   "penalties": [
+    10.0,
+    2.0
+   ],
+   "success": 1.0,
+   "cloud_cost": 0.1,
+   "scale": 1.0,
+   "target": [],
+   "eta": 0.0,
+   "window": 200
+  },
+  "seed": 101,
+  "timesteps": 50000,
+  "algo_kwargs": {},
+  "curve_every": 0,
+  "svrs": false,
+  "prune": false,
+  "init_from": ""
+ },
+ "tag": "tune dqn cfg0 weighted",
+ "train_seconds": 56.88994908332825,
+ "timesteps_done": 50000,
+ "curve": [],
+ "versions": {
+  "python": "3.13.16",
+  "numpy": "2.4.4",
+  "gymnasium": "1.3.0",
+  "stable_baselines3": "2.9.0",
+  "torch": "2.14.0+cu130",
+  "platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39"
+ },
+ "exact": {
+  "miss": [
+   0.06441401722027967,
+   0.14138440604229843
+  ],
+  "latency": [
+   37.39669798266839,
+   46.105929719191614
+  ],
+  "overall": 0.10289921163128905,
+  "cost": 0.46345449214369683,
+  "edge": 0.9270877324001654
+ },
+ "expected_return": 85.27101389300603,
+ "mc": {
+  "miss": [
+   0.06730481603350284,
+   0.15013539263865208
+  ],
+  "cost": 0.4866594728061663,
+  "edge": 0.92245,
+  "overall": 0.1086,
+  "episodes": 100,
+  "cost_se": 0.024582724250755486
+ },
+ "final_penalties": [
+  10.0,
+  2.0
+ ],
+ "wall_seconds": 63.65037441253662
+}

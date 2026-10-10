@@ -1,0 +1,113 @@
+{
+ "key": "8136b3abfa052911",
+ "spec": {
+  "algo": "ppo",
+  "sys": {
+   "base_ms": [
+    30.0,
+    30.0
+   ],
+   "slope_ms": [
+    15.0,
+    15.0
+   ],
+   "drain": [
+    0.6,
+    0.6
+   ],
+   "cap": 8,
+   "class_probs": [
+    0.5,
+    0.5
+   ],
+   "limits_ms": [
+    50.0,
+    90.0
+   ],
+   "eval_weights": [
+    10.0,
+    2.0
+   ],
+   "cloud_ms": 110.0,
+   "cloud_meet": [
+    0.0,
+    0.5
+   ],
+   "background": 0.2,
+   "background_mode": "deterministic",
+   "max_steps": 200
+  },
+  "reward": {
+   "kind": "weighted",
+   "penalties": [
+    10.0,
+    2.0
+   ],
+   "success": 1.0,
+   "cloud_cost": 0.1,
+   "scale": 1.0,
+   "target": [],
+   "eta": 0.0,
+   "window": 200
+  },
+  "seed": 0,
+  "timesteps": 25000,
+  "algo_kwargs": {
+   "batch_size": 128,
+   "ent_coef": 0.0,
+   "gamma": 0.99,
+   "learning_rate": 0.001,
+   "n_steps": 1024,
+   "net_arch": [
+    128,
+    128
+   ]
+  },
+  "curve_every": 0,
+  "svrs": false,
+  "prune": false,
+  "init_from": "ppo_54a898ef0cd5aaf9_s0.zip"
+ },
+ "tag": "ft cloud meets analytics limit w.p. 0.5 weighted",
+ "train_seconds": 29.048843145370483,
+ "timesteps_done": 125952,
+ "curve": [],
+ "versions": {
+  "python": "3.13.16",
+  "numpy": "2.4.4",
+  "gymnasium": "1.3.0",
+  "stable_baselines3": "2.9.0",
+  "torch": "2.14.0+cu130",
+  "platform": "Linux-6.18.44-fc-v114-x86_64-with-glibc2.39"
+ },
+ "exact": {
+  "miss": [
+   0.02061778559447729,
+   0.09276887820697206
+  ],
+  "latency": [
+   35.859068791017854,
+   46.593296473398034
+  ],
+  "overall": 0.05669333190072468,
+  "cost": 0.1958578061793585,
+  "edge": 0.8969222289957893
+ },
+ "expected_return": 147.42821696389925,
+ "mc": {
+  "miss": [
+   0.021882494004796162,
+   0.09357485988791032
+  ],
+  "cost": 0.20298732991189114,
+  "edge": 0.89735,
+  "overall": 0.0577,
+  "episodes": 100,
+  "cost_se": 0.00999186950847714
+ },
+ "final_penalties": [
+  10.0,
+  2.0
+ ],
+ "wall_seconds": 38.990657806396484
+}

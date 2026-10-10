@@ -7,6 +7,8 @@ dist/
 .venv/
 venv/
 *.zip
+!results/gmodels/*.zip
 !results/*.json
 *.tmp
 results/logs/
+qos_offloading.egg-info/
