@@ -4,16 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "qos_offloading"
-version = "3.0.0"
-description = "QoS-Aware Deep Reinforcement Learning for SLA-Differentiated Task Offloading in the IoT Edge-Cloud Continuum"
+version = "1.0.0"
+description = "Class-weighted rewards for SLA-differentiated task offloading, measured against an exact optimum"
 requires-python = ">=3.10"
-dependencies = [
-    "numpy>=1.24",
-    "gymnasium>=0.29",
-    "stable-baselines3>=2.0",
-    "sb3-contrib>=2.0",
-    "scipy>=1.10",
-]
+dependencies = ["numpy>=1.24", "scipy>=1.10", "gymnasium>=0.29", "stable-baselines3>=2.0", "sb3-contrib>=2.0"]
 
 [project.optional-dependencies]
 dev = ["pytest>=7.0", "matplotlib>=3.7"]

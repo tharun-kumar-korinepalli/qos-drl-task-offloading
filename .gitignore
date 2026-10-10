@@ -1,14 +1,9 @@
 __pycache__/
 *.pyc
 *.egg-info/
-build/
-dist/
 .pytest_cache/
 .venv/
-venv/
-*.zip
-!results/gmodels/*.zip
-!results/*.json
 *.tmp
-results/logs/
-qos_offloading.egg-info/
+*.aux
+*.log
+*.out

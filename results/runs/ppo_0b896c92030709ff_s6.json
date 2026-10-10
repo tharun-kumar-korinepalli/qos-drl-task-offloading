@@ -1,0 +1,113 @@
+{
+ "key": "0b896c92030709ff",
+ "spec": {
+  "algo": "ppo",
+  "sys": {
+   "base_ms": [
+    30.0,
+    30.0
+   ],
+   "slope_ms": [
+    15.0,
+    15.0
+   ],
+   "drain": [
+    0.6,
+    0.6
+   ],
+   "cap": 8,
+   "class_probs": [
+    0.5,
+    0.5
+   ],
+   "limits_ms": [
+    50.0,
+    90.0
+   ],
+   "eval_weights": [
+    10.0,
+    2.0
+   ],
+   "cloud_ms": 110.0,
+   "cloud_meet": [
+    0.0,
+    0.0
+   ],
+   "background": 0.2,
+   "background_mode": "bernoulli",
+   "max_steps": 200
+  },
+  "reward": {
+   "kind": "weighted",
+   "penalties": [
+    10.0,
+    2.0
+   ],
+   "success": 1.0,
+   "cloud_cost": 0.1,
+   "scale": 1.0,
+   "target": [],
+   "eta": 0.0,
+   "window": 200
+  },
+  "seed": 6,
+  "timesteps": 25000,
+  "algo_kwargs": {
+   "batch_size": 128,
+   "ent_coef": 0.0,
+   "gamma": 0.99,
+   "learning_rate": 0.001,
+   "n_steps": 1024,
+   "net_arch": [
+    128,
+    128
+   ]
+  },
+  "curve_every": 0,
+  "svrs": false,
+  "prune": false,
+  "init_from": "ppo_747f232d9676b3f4_s6.zip"
+ },
+ "tag": "shift random background (Bernoulli 0.2) weighted",
+ "train_seconds": 35.894039154052734,
+ "timesteps_done": 125952,
+ "curve": [],
+ "versions": {
+  "python": "3.13.16",
+  "numpy": "2.4.4",
+  "gymnasium": "1.3.0",
+  "stable_baselines3": "2.9.0",
+  "torch": "2.14.0+cu130",
+  "platform": "Linux-6.18.44-fc-v114-x86_64-with-glibc2.39"
+ },
+ "exact": {
+  "miss": [
+   0.04721846867265599,
+   0.14469143737018877
+  ],
+  "latency": [
+   38.89264890672243,
+   45.228759600833456
+  ],
+  "overall": 0.09595495302142237,
+  "cost": 0.38078378073346875,
+  "edge": 0.9040450469785826
+ },
+ "expected_return": 102.73315418859416,
+ "mc": {
+  "miss": [
+   0.04632234726688103,
+   0.14281449044585987
+  ],
+  "cost": 0.37442622678026505,
+  "edge": 0.9052,
+  "overall": 0.0948,
+  "episodes": 100,
+  "cost_se": 0.015625025297557295
+ },
+ "final_penalties": [
+  10.0,
+  2.0
+ ],
+ "wall_seconds": 46.05407428741455
+}

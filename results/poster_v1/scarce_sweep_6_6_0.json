@@ -1,9 +1,0 @@
-{
- "class_0_violation_rate": 0.19536757301107754,
- "class_0_avg_latency": 45.68479355488419,
- "class_1_violation_rate": 0.0029791459781529296,
- "class_1_avg_latency": 42.14746772591857,
- "overall_violation_rate": 0.0985,
- "sla_cost_per_task": 0.9798170110335407,
- "edge_utilization": 0.95975
-}
