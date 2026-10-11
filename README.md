@@ -67,3 +67,8 @@ Finished runs are cached, so a stopped run continues where it left off. All runs
 | Cloud meets limit with probability | 0, 0 | 0, 0.5 | 0, 0.2, 0.6 | 0, 0.2, 0.6 |
 
 Each step one task arrives. The agent sees the queue lengths, the class of the task and the share of the episode left, and places the task on an edge node or the cloud. Edge latency is the processing time plus the wait per queued task times the queue length. The reward is +1 for a met limit, minus the class penalty for a miss, and minus 0.1 for a cloud placement. The SLA cost is the expected operator weight of a missed task.
+
+## Authors
+
+Shilpa Golla
+Tharun Kumar Korine Palli
