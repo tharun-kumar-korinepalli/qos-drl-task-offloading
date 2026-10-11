@@ -70,5 +70,5 @@ Each step one task arrives. The agent sees the queue lengths, the class of the t
 
 ## Authors
 
-Shilpa Golla
-Tharun Kumar Korine Palli
+1. Shilpa Golla
+2. Tharun Kumar Korine Palli
