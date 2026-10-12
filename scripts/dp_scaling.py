@@ -1,5 +1,4 @@
 import json
-import resource
 import sys
 import time
 from pathlib import Path
@@ -9,6 +8,18 @@ sys.path.insert(0, str(ROOT))
 from qos_offloading import ExactModel, System
 
 OUT = ROOT / "results" / "summary" / "dp_scaling.json"
+
+# CHANGE 1: replaces "import resource" (resource does not exist on Windows,
+# and on Mac ru_maxrss is in bytes, not kilobytes)
+try:
+    import resource
+
+    def peak_mb():
+        r = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+        return r / 1024 / 1024 if sys.platform == "darwin" else r / 1024
+except ImportError:
+    def peak_mb():
+        return float("nan")
 
 
 def main():
@@ -27,7 +38,8 @@ def main():
         rows.append({"edge_nodes": n, "states": m.S * m.K * m.T, "queue_states": m.S,
                      "transition_entries": int(sum(M.nnz for mats in m.P.values() for M in mats)),
                      "build_s": build, "solve_s": solve, "evaluate_s": time.time() - t2,
-                     "peak_rss_mb": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024, "cost": ev["cost"]})
+                     "peak_rss_mb": peak_mb(),  # CHANGE 2: was resource.getrusage(...).ru_maxrss / 1024
+                     "cost": ev["cost"]})
         print(rows[-1], flush=True)
         del m
     OUT.parent.mkdir(parents=True, exist_ok=True)

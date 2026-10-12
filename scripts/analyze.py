@@ -122,7 +122,10 @@ def published(best):
         for rw in ["weighted", "flat"]:
             m[f"vs_ppo_{rw}"] = compare(m["costs"], [load(main[("ppo", rw, s)])["exact"]["cost"] for s in S.SEEDS])
         rows["|".join(map(str, key))] = m
-    return {"rows": rows}
+    # Holm correction over all comparisons with fixed-reward PPO (3 variants x 2 rewards = 6 tests), Sec. 5.3
+    tests = [m[f"vs_ppo_{rw}"] for m in rows.values() for rw in ["weighted", "flat"]]
+    with_holm(tests)
+    return {"rows": rows, "tests_holm_over": len(tests)}
 
 
 def shifts(best):
