@@ -15,7 +15,7 @@ qos_offloading/
 scripts/        run, analyze and plot
 tests/
 results/        trained agents and summaries
-figures/
+figures/      paper figures; Fig. 1 and 2 are TikZ sources (.tex)
 RESULTS.md      all result tables
 ```
 
@@ -42,6 +42,14 @@ python scripts/dp_scaling.py
 python scripts/analyze.py
 python scripts/report.py
 python scripts/figures.py
+```
+
+`scripts/figures.py` draws Fig. 3 to 5 of the paper. The two diagrams, Fig. 1 and Fig. 2, are built with LaTeX:
+
+```
+cd figures
+pdflatex architecture.tex
+pdflatex fig_overview.tex
 ```
 
 To train everything again, delete `results/runs`, `results/tables` and `results/models`, then run one shard per CPU core:
