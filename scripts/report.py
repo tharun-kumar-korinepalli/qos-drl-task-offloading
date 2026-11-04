@@ -91,4 +91,28 @@ for s, r in S["shifts"]["rows"].items():
 L += table(["Change", "Optimum", "SLA rule", "Reservation, nominal", "Reservation, re-tuned", "PPO weighted, nominal",
             "PPO weighted, fine-tuned", "PPO flat, nominal", "PPO flat, fine-tuned"], rows)
 
+REV = SUMMARY / "revision.json"
+if REV.exists():
+    V = json.loads(REV.read_text())
+    if V.get("long"):
+        L += ["", "## Large4-3C, 2M training steps (revision)", ""]
+        L += table(["Reward", "SLA cost", "Above optimum", "Above optimum at 200k", "p vs 200k (Holm)", "Beats node sets"],
+                   [[r, ci(v["cost"], 4), f"{v['gap_pct']:.1f}%", f"{v['gap_pct_200k']:.1f}%",
+                     f"{v['vs_200k']['p_holm']:.3f}", f"{v['vs_node_sets']['better']}/10"] for r, v in V["long"].items()])
+    if V.get("lagrangian"):
+        G = V["lagrangian"]
+        L += ["", "## PPO-Lagrangian, targets = miss rates of the optimum (revision)", ""]
+        L += table(["System", "Step size", "SLA cost", "Above optimum", "Seeds meeting all targets", "p vs weighted PPO (Holm)",
+                    "Final multipliers"],
+                   [[n, str(G["eta"][n]["eta"]), ci(G[n]["cost"], 4), f"{G[n]['gap_pct']:.1f}%",
+                     f"{G[n]['seeds_meeting_all_targets']}/10", f"{G[n]['vs_ppo_weighted']['p_holm']:.3f}",
+                     ", ".join(f"{x:.2f}" for x in G[n]["final_multipliers_mean"])] for n in ("nominal", "large4_3c")])
+RT = SUMMARY / "runtimes.json"
+if RT.exists():
+    T = json.loads(RT.read_text())
+    L += ["", f"## Runtimes ({T['cpu']}, one core)", ""]
+    L += table(["System", "DP solve (s)", "Exact evaluation (s)", "PPO steps", "PPO training (min)"],
+               [[NAMES[k], f"{T[k]['solve_s']:.2f}", f"{T[k]['evaluate_s']:.2f}", f"{T[k]['ppo_steps']:,}",
+                 f"{T[k]['ppo_train_s'] / 60:.1f}"] for k in NAMES if k in T])
+
 (ROOT / "RESULTS.md").write_text("\n".join(L) + "\n")

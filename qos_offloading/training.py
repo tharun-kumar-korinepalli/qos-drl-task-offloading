@@ -131,17 +131,34 @@ def execute(job):
     exact = None if (job.risk_features or job.prune) else ExactModel(job.system)
     agent = load_agent(job, MODELS / job.init_from, env) if job.init_from else make_agent(job, env)
     curve = []
+    curve_time = [0.0]
+    duals = []
 
     class Curve(BaseCallback):
         def _on_step(self):
             if job.curve_every and self.num_timesteps % job.curve_every == 0:
+                tc = time.time()
                 m = exact.evaluate(policy_table(self.model, exact)) if exact else simulate(self.model, job, 50)
                 curve.append({"timesteps": int(self.num_timesteps), **m})
+                if job.reward.kind == "lagrangian":
+                    curve[-1]["multipliers"] = [float(x) for x in env.lam]
+                curve_time[0] += time.time() - tc
             return True
 
+        def _on_rollout_end(self):
+            # PPO-Lagrangian: one dual step per collected rollout block (Sec. IV, Constrained Baseline)
+            if job.reward.kind == "lagrangian":
+                v_hat, lam = env.lagrange_update()
+                duals.append({"timesteps": int(self.num_timesteps), "v_hat": v_hat, "multipliers": lam})
+
+    t_learn = time.time()
     agent.learn(total_timesteps=job.timesteps, callback=Curve(), reset_num_timesteps=not job.init_from)
+    learn_wall = time.time() - t_learn
     rec = {"key": job.key(), "spec": job.spec(), "tag": job.tag, "train_seconds": time.time() - t0,
+           "learn_seconds_without_curve": learn_wall - curve_time[0], "curve_seconds": curve_time[0],
            "timesteps_done": int(agent.num_timesteps), "curve": curve, "versions": versions()}
+    if duals:
+        rec["duals"] = duals
     if exact is not None:
         table = policy_table(agent, exact)
         rec["exact"] = exact.evaluate(table)
@@ -154,7 +171,7 @@ def execute(job):
     if job.save_model:
         MODELS.mkdir(parents=True, exist_ok=True)
         agent.save(MODELS / f"{job.name()}.zip")
-    if job.reward.kind == "tiered_adaptive":
+    if job.reward.kind in ("tiered_adaptive", "lagrangian"):
         rec["final_penalties"] = [float(x) for x in env.lam]
     rec["wall_seconds"] = time.time() - t0
     out.parent.mkdir(parents=True, exist_ok=True)

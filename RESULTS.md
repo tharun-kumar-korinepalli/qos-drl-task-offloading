@@ -27,122 +27,145 @@ Learned agents: mean over 10 seeds with 95% bootstrap interval. Rules and DP pol
 
 | Edge nodes | States | Transitions | Solve (s) | Evaluate (s) | Peak memory (MB) |
 |---|---|---|---|---|---|
-| 2 | 32,400 | 1,376 | 0.01 | 0.00 | nan |
-| 3 | 291,600 | 32,050 | 0.03 | 0.01 | nan |
-| 4 | 2,624,400 | 775,900 | 0.41 | 0.23 | nan |
-| 5 | 23,619,600 | 11,302,060 | 8.37 | 6.71 | nan |
+| 2 | 32,400 | 1,376 | 0.01 | 0.00 | 57 |
+| 3 | 291,600 | 32,050 | 0.02 | 0.01 | 59 |
+| 4 | 2,624,400 | 775,900 | 0.29 | 0.14 | 92 |
+| 5 | 23,619,600 | 11,302,060 | 3.39 | 6.68 | 485 |
 
 ## Tuning
 
-- ppo|weighted: configuration 4 {'batch_size': 128, 'ent_coef': 0.0, 'gamma': 0.99, 'learning_rate': 0.001, 'n_steps': 1024, 'net_arch': [128, 128]}, expected return 118.0
-- ppo|flat: configuration 4 {'batch_size': 128, 'ent_coef': 0.0, 'gamma': 0.99, 'learning_rate': 0.001, 'n_steps': 1024, 'net_arch': [128, 128]}, expected return 116.9
-- dqn|weighted: configuration 2 {'buffer_size': 100000, 'exploration_fraction': 0.1, 'gamma': 0.99, 'learning_rate': 0.0001, 'net_arch': [128, 128], 'reward_scale': 0.1, 'target_update_interval': 2000}, expected return 117.0
+- ppo|weighted: configuration 4 {'batch_size': 128, 'ent_coef': 0.0, 'gamma': 0.99, 'learning_rate': 0.001, 'n_steps': 1024, 'net_arch': [128, 128]}, expected return 120.2
+- ppo|flat: configuration 4 {'batch_size': 128, 'ent_coef': 0.0, 'gamma': 0.99, 'learning_rate': 0.001, 'n_steps': 1024, 'net_arch': [128, 128]}, expected return 117.5
+- dqn|weighted: configuration 2 {'buffer_size': 100000, 'exploration_fraction': 0.1, 'gamma': 0.99, 'learning_rate': 0.0001, 'net_arch': [128, 128], 'reward_scale': 0.1, 'target_update_interval': 2000}, expected return 117.1
 - dqn|flat: configuration 2 {'buffer_size': 100000, 'exploration_fraction': 0.1, 'gamma': 0.99, 'learning_rate': 0.0001, 'net_arch': [128, 128], 'reward_scale': 0.1, 'target_update_interval': 2000}, expected return 122.2
-- a2c|weighted: configuration 5 {'ent_coef': 0.0, 'gamma': 0.999, 'learning_rate': 0.001, 'n_steps': 5, 'net_arch': [128, 128], 'normalize_advantage': False}, expected return 61.9
-- a2c|flat: configuration 5 {'ent_coef': 0.0, 'gamma': 0.999, 'learning_rate': 0.001, 'n_steps': 5, 'net_arch': [128, 128], 'normalize_advantage': False}, expected return 58.9
-- hetero3|weighted: configuration 0, expected return 168.0
-- hetero3|flat: configuration 0, expected return 150.0
-- hetero3_3c|weighted: configuration 4, expected return 159.2
-- hetero3_3c|flat: configuration 4, expected return 146.1
-- large4_3c|weighted: configuration 0, expected return 162.1
-- large4_3c|flat: configuration 0, expected return 144.8
+- a2c|weighted: configuration 5 {'ent_coef': 0.0, 'gamma': 0.999, 'learning_rate': 0.001, 'n_steps': 5, 'net_arch': [128, 128], 'normalize_advantage': False}, expected return 94.6
+- a2c|flat: configuration 0 {}, expected return 43.2
+- hetero3|weighted: configuration 4, expected return 162.8
+- hetero3|flat: configuration 4, expected return 143.8
+- hetero3_3c|weighted: configuration 4, expected return 158.8
+- hetero3_3c|flat: configuration 4, expected return 146.7
+- large4_3c|weighted: configuration 4, expected return 162.6
+- large4_3c|flat: configuration 0, expected return 144.5
 
 ## Nominal system, 100,000 steps
 
 | Agent | v_crit (%) | v_ana (%) | SLA cost | Above optimum | Beats reservation | Beats SLA rule |
 |---|---|---|---|---|---|---|
-| ppo|weighted | 2.7 | 15.4 | 0.287 [0.279, 0.299] | 9.9% | 9/10 (p=0.021) | 10/10 |
-| ppo|corrected | 2.6 | 15.7 | 0.286 [0.279, 0.298] | 9.6% | 9/10 (p=0.021) | 10/10 |
-| ppo|flat | 11.7 | 0.2 | 0.588 [0.562, 0.625] | 125.1% | 0/10 (p=0.002) | 6/10 |
-| dqn|weighted | 4.8 | 10.1 | 0.339 [0.314, 0.361] | 29.5% | 3/10 (p=0.344) | 10/10 |
-| dqn|flat | 11.0 | 0.2 | 0.550 [0.537, 0.569] | 110.5% | 0/10 (p=0.002) | 9/10 |
-| a2c|weighted | 15.7 | 4.0 | 0.823 [0.614, 1.042] | 214.8% | 0/10 (p=0.002) | 5/10 |
-| a2c|flat | 17.4 | 0.4 | 0.872 [0.678, 1.145] | 233.7% | 0/10 (p=0.002) | 2/10 |
+| ppo|weighted | 2.9 | 14.4 | 0.291 [0.278, 0.307] | 11.3% | 8/10 (p=0.109) | 10/10 |
+| ppo|corrected | 2.7 | 14.8 | 0.284 [0.277, 0.296] | 8.6% | 9/10 (p=0.021) | 10/10 |
+| ppo|flat | 11.3 | 0.2 | 0.566 [0.556, 0.577] | 116.7% | 0/10 (p=0.002) | 7/10 |
+| dqn|weighted | 4.5 | 10.6 | 0.330 [0.309, 0.352] | 26.3% | 2/10 (p=0.109) | 10/10 |
+| dqn|flat | 11.0 | 0.1 | 0.550 [0.540, 0.563] | 110.4% | 0/10 (p=0.002) | 9/10 |
+| a2c|weighted | 18.1 | 3.9 | 0.946 [0.678, 1.247] | 261.9% | 0/10 (p=0.002) | 4/10 |
+| a2c|flat | 13.5 | 0.2 | 0.678 [0.608, 0.763] | 159.6% | 0/10 (p=0.002) | 3/10 |
 
 | Algo | Rewards | Metric | Diff | A12 | p (Holm) | Lower |
 |---|---|---|---|---|---|---|
-| ppo | weighted vs flat | cost | -0.3011 | 0.00 | 0.0002 | 10/10 |
-| ppo | weighted vs flat | miss0 | -0.0907 | 0.00 | 0.0002 | 10/10 |
-| ppo | weighted vs flat | miss1 | +0.1524 | 1.00 | 0.0002 | 0/10 |
-| ppo | corrected vs flat | cost | -0.3019 | 0.00 | 0.0002 | 10/10 |
-| ppo | corrected vs flat | miss0 | -0.0914 | 0.00 | 0.0002 | 10/10 |
-| ppo | corrected vs flat | miss1 | +0.1550 | 1.00 | 0.0002 | 0/10 |
-| ppo | corrected vs weighted | cost | -0.0008 | 0.52 | 1.0000 | 6/10 |
-| ppo | corrected vs weighted | miss0 | -0.0007 | 0.60 | 1.0000 | 4/10 |
-| ppo | corrected vs weighted | miss1 | +0.0027 | 0.47 | 1.0000 | 5/10 |
-| dqn | weighted vs flat | cost | -0.2117 | 0.00 | 0.0002 | 10/10 |
-| dqn | weighted vs flat | miss0 | -0.0622 | 0.00 | 0.0002 | 10/10 |
-| dqn | weighted vs flat | miss1 | +0.0991 | 1.00 | 0.0002 | 0/10 |
-| a2c | weighted vs flat | cost | -0.0495 | 0.45 | 1.0000 | 4/10 |
-| a2c | weighted vs flat | miss0 | -0.0172 | 0.39 | 1.0000 | 6/10 |
-| a2c | weighted vs flat | miss1 | +0.0363 | 0.96 | 0.0008 | 0/10 |
+| ppo | weighted vs flat | cost | -0.2754 | 0.00 | 0.0002 | 10/10 |
+| ppo | weighted vs flat | miss0 | -0.0834 | 0.00 | 0.0002 | 10/10 |
+| ppo | weighted vs flat | miss1 | +0.1418 | 1.00 | 0.0002 | 0/10 |
+| ppo | corrected vs flat | cost | -0.2825 | 0.00 | 0.0002 | 10/10 |
+| ppo | corrected vs flat | miss0 | -0.0856 | 0.00 | 0.0002 | 10/10 |
+| ppo | corrected vs flat | miss1 | +0.1455 | 1.00 | 0.0002 | 0/10 |
+| ppo | corrected vs weighted | cost | -0.0070 | 0.40 | 1.0000 | 6/10 |
+| ppo | corrected vs weighted | miss0 | -0.0022 | 0.40 | 1.0000 | 5/10 |
+| ppo | corrected vs weighted | miss1 | +0.0038 | 0.69 | 0.8275 | 4/10 |
+| dqn | weighted vs flat | cost | -0.2197 | 0.00 | 0.0002 | 10/10 |
+| dqn | weighted vs flat | miss0 | -0.0648 | 0.00 | 0.0002 | 10/10 |
+| dqn | weighted vs flat | miss1 | +0.1045 | 1.00 | 0.0002 | 0/10 |
+| a2c | weighted vs flat | cost | +0.2676 | 0.59 | 1.0000 | 5/10 |
+| a2c | weighted vs flat | miss0 | +0.0461 | 0.58 | 1.0000 | 5/10 |
+| a2c | weighted vs flat | miss1 | +0.0371 | 1.00 | 0.0002 | 0/10 |
 
 ## Larger systems, PPO tuned per system
 
 | System, reward | SLA cost | Above optimum | Beats reservation | Beats node sets |
 |---|---|---|---|---|
-| hetero3|weighted | 0.1288 [0.1163, 0.1445] | 43.3% | 7/10 | 4/10 |
-| hetero3|corrected | 0.1227 [0.1162, 0.1300] | 36.5% | 9/10 | 2/10 |
-| hetero3|flat | 0.1577 [0.1471, 0.1692] | 75.4% | 2/10 | 0/10 |
-| hetero3_3c|weighted | 0.1403 [0.1305, 0.1505] | 67.2% | 8/10 | 0/10 |
-| hetero3_3c|corrected | 0.1400 [0.1248, 0.1611] | 66.9% | 8/10 | 0/10 |
-| hetero3_3c|flat | 0.2981 [0.2534, 0.3460] | 255.4% | 0/10 | 0/10 |
-| large4_3c|weighted | 0.1251 [0.1189, 0.1328] | 61.0% | 0/10 | 0/10 |
-| large4_3c|corrected | 0.1195 [0.1160, 0.1234] | 53.9% | 0/10 | 0/10 |
-| large4_3c|flat | 0.3403 [0.3000, 0.3818] | 338.1% | 0/10 | 0/10 |
+| hetero3|weighted | 0.1302 [0.1201, 0.1442] | 44.8% | 8/10 | 3/10 |
+| hetero3|corrected | 0.1271 [0.1171, 0.1378] | 41.5% | 7/10 | 3/10 |
+| hetero3|flat | 0.2126 [0.1707, 0.2622] | 136.5% | 1/10 | 1/10 |
+| hetero3_3c|weighted | 0.1410 [0.1344, 0.1483] | 68.1% | 9/10 | 0/10 |
+| hetero3_3c|corrected | 0.1303 [0.1241, 0.1366] | 55.3% | 10/10 | 0/10 |
+| hetero3_3c|flat | 0.2874 [0.2497, 0.3280] | 242.6% | 0/10 | 0/10 |
+| large4_3c|weighted | 0.1366 [0.1255, 0.1494] | 75.8% | 0/10 | 0/10 |
+| large4_3c|corrected | 0.1306 [0.1227, 0.1410] | 68.2% | 0/10 | 0/10 |
+| large4_3c|flat | 0.3002 [0.2616, 0.3413] | 286.5% | 0/10 | 0/10 |
 
 | System | Rewards | Diff | A12 | p (Holm) | Lower |
 |---|---|---|---|---|---|
-| hetero3 | weighted vs flat | -0.0288 | 0.16 | 0.0357 | 8/10 |
-| hetero3 | corrected vs flat | -0.0350 | 0.04 | 0.0006 | 10/10 |
-| hetero3 | corrected vs weighted | -0.0062 | 0.50 | 1.0000 | 6/10 |
-| hetero3_3c | weighted vs flat | -0.1578 | 0.00 | 0.0001 | 10/10 |
-| hetero3_3c | corrected vs flat | -0.1581 | 0.01 | 0.0001 | 10/10 |
-| hetero3_3c | corrected vs weighted | -0.0003 | 0.40 | 0.9625 | 6/10 |
-| large4_3c | weighted vs flat | -0.2152 | 0.00 | 0.0001 | 10/10 |
-| large4_3c | corrected vs flat | -0.2208 | 0.00 | 0.0001 | 10/10 |
-| large4_3c | corrected vs weighted | -0.0055 | 0.36 | 0.9450 | 6/10 |
+| hetero3 | weighted vs flat | -0.0824 | 0.12 | 0.0115 | 8/10 |
+| hetero3 | corrected vs flat | -0.0855 | 0.08 | 0.0036 | 9/10 |
+| hetero3 | corrected vs weighted | -0.0030 | 0.47 | 0.8534 | 5/10 |
+| hetero3_3c | weighted vs flat | -0.1464 | 0.00 | 0.0001 | 10/10 |
+| hetero3_3c | corrected vs flat | -0.1571 | 0.00 | 0.0001 | 10/10 |
+| hetero3_3c | corrected vs weighted | -0.0107 | 0.25 | 0.1890 | 8/10 |
+| large4_3c | weighted vs flat | -0.1637 | 0.00 | 0.0001 | 10/10 |
+| large4_3c | corrected vs flat | -0.1696 | 0.00 | 0.0001 | 10/10 |
+| large4_3c | corrected vs weighted | -0.0059 | 0.37 | 0.7054 | 7/10 |
 
 ## Larger systems, PPO with the nominal setting
 
 | System, reward | SLA cost | Above optimum | Beats reservation | Beats node sets |
 |---|---|---|---|---|
-| hetero3|weighted | 0.1343 [0.1196, 0.1543] | 49.5% | 8/10 | 3/10 |
-| hetero3|corrected | 0.1165 [0.1136, 0.1195] | 29.6% | 10/10 | 7/10 |
-| hetero3|flat | 0.1996 [0.1712, 0.2319] | 122.1% | 1/10 | 0/10 |
-| hetero3_3c|weighted | 0.1403 [0.1305, 0.1505] | 67.2% | 8/10 | 0/10 |
-| hetero3_3c|corrected | 0.1400 [0.1248, 0.1611] | 66.9% | 8/10 | 0/10 |
-| hetero3_3c|flat | 0.2981 [0.2534, 0.3460] | 255.4% | 0/10 | 0/10 |
-| large4_3c|weighted | 0.1617 [0.1326, 0.1997] | 108.1% | 0/10 | 0/10 |
-| large4_3c|corrected | 0.1334 [0.1197, 0.1507] | 71.8% | 0/10 | 0/10 |
-| large4_3c|flat | 0.3457 [0.2694, 0.4254] | 345.1% | 0/10 | 0/10 |
+| hetero3|weighted | 0.1302 [0.1201, 0.1442] | 44.8% | 8/10 | 3/10 |
+| hetero3|corrected | 0.1271 [0.1171, 0.1378] | 41.5% | 7/10 | 3/10 |
+| hetero3|flat | 0.2126 [0.1707, 0.2622] | 136.5% | 1/10 | 1/10 |
+| hetero3_3c|weighted | 0.1410 [0.1344, 0.1483] | 68.1% | 9/10 | 0/10 |
+| hetero3_3c|corrected | 0.1303 [0.1241, 0.1366] | 55.3% | 10/10 | 0/10 |
+| hetero3_3c|flat | 0.2874 [0.2497, 0.3280] | 242.6% | 0/10 | 0/10 |
+| large4_3c|weighted | 0.1366 [0.1255, 0.1494] | 75.8% | 0/10 | 0/10 |
+| large4_3c|corrected | 0.1306 [0.1227, 0.1410] | 68.2% | 0/10 | 0/10 |
+| large4_3c|flat | 0.2972 [0.2470, 0.3542] | 282.5% | 0/10 | 0/10 |
 
 | System | Rewards | Diff | A12 | p (Holm) | Lower |
 |---|---|---|---|---|---|
-| hetero3 | weighted vs flat | -0.0653 | 0.07 | 0.0024 | 9/10 |
-| hetero3 | corrected vs flat | -0.0831 | 0.00 | 0.0001 | 10/10 |
-| hetero3 | corrected vs weighted | -0.0178 | 0.27 | 0.2676 | 8/10 |
-| hetero3_3c | weighted vs flat | -0.1578 | 0.00 | 0.0001 | 10/10 |
-| hetero3_3c | corrected vs flat | -0.1581 | 0.01 | 0.0002 | 10/10 |
-| hetero3_3c | corrected vs weighted | -0.0003 | 0.40 | 0.4813 | 6/10 |
-| large4_3c | weighted vs flat | -0.1841 | 0.08 | 0.0029 | 9/10 |
-| large4_3c | corrected vs flat | -0.2123 | 0.02 | 0.0003 | 10/10 |
-| large4_3c | corrected vs weighted | -0.0282 | 0.32 | 0.3806 | 6/10 |
+| hetero3 | weighted vs flat | -0.0824 | 0.12 | 0.0115 | 8/10 |
+| hetero3 | corrected vs flat | -0.0855 | 0.08 | 0.0036 | 9/10 |
+| hetero3 | corrected vs weighted | -0.0030 | 0.47 | 0.8534 | 5/10 |
+| hetero3_3c | weighted vs flat | -0.1464 | 0.00 | 0.0001 | 10/10 |
+| hetero3_3c | corrected vs flat | -0.1571 | 0.00 | 0.0001 | 10/10 |
+| hetero3_3c | corrected vs weighted | -0.0107 | 0.25 | 0.1890 | 8/10 |
+| large4_3c | weighted vs flat | -0.1606 | 0.02 | 0.0003 | 9/10 |
+| large4_3c | corrected vs flat | -0.1665 | 0.01 | 0.0002 | 9/10 |
+| large4_3c | corrected vs weighted | -0.0059 | 0.37 | 0.7054 | 7/10 |
 
 ## Tiered adaptive penalties (nominal system)
 
 | Variant | SLA cost | Above optimum | v_crit (%) | Final penalties | Scored by |
 |---|---|---|---|---|---|
-| nominal|full|0.001 | 0.368 [0.346, 0.393] | 40.9% | 5.9 | 11.10, 4.67 | 500 episodes |
-| nominal|full|0.01 | 0.418 [0.380, 0.453] | 59.9% | 7.3 | 30.04, 14.14 | 500 episodes |
-| nominal|adaptive_only|0.01 | 0.414 [0.396, 0.434] | 58.2% | 7.1 | 38.09, 23.05 | exact |
+| nominal|full|0.001 | 0.360 [0.339, 0.382] | 37.7% | 5.6 | 10.98, 4.89 | 500 episodes |
+| nominal|full|0.01 | 0.383 [0.357, 0.417] | 46.6% | 6.3 | 28.82, 15.81 | 500 episodes |
+| nominal|adaptive_only|0.01 | 0.414 [0.393, 0.440] | 58.3% | 7.1 | 37.78, 24.07 | exact |
 
 ## Changes of the nominal system
 
 | Change | Optimum | SLA rule | Reservation, nominal | Reservation, re-tuned | PPO weighted, nominal | PPO weighted, fine-tuned | PPO flat, nominal | PPO flat, fine-tuned |
 |---|---|---|---|---|---|---|---|---|
-| slower tasks (+5 ms per queued task) | 0.2615 | 123.1% | 16.3% | 16.3% | 9.9% | 10.0% | 126.8% | 119.8% |
-| slower service (d = 0.55) | 0.4421 | 163.3% | 5.6% | 5.6% | 14.1% | 14.0% | 166.4% | 157.7% |
-| more background (0.3 per step) | 0.4266 | 168.1% | 6.1% | 6.1% | 14.9% | 12.0% | 172.3% | 167.0% |
-| random background (Bernoulli 0.2) | 0.3415 | 106.2% | 6.0% | 6.0% | 4.3% | 4.9% | 106.6% | 99.5% |
-| cloud meets analytics limit w.p. 0.5 | 0.1718 | 239.3% | 7.0% | 7.0% | 22.3% | 19.5% | 242.1% | 233.7% |
+| slower tasks (+5 ms per queued task) | 0.2615 | 123.1% | 16.3% | 16.3% | 11.2% | 9.2% | 117.6% | 123.2% |
+| slower service (d = 0.55) | 0.4421 | 163.3% | 5.6% | 5.6% | 17.5% | 10.5% | 155.6% | 155.2% |
+| more background (0.3 per step) | 0.4266 | 168.1% | 6.1% | 6.1% | 18.2% | 15.6% | 161.7% | 160.8% |
+| random background (Bernoulli 0.2) | 0.3415 | 106.2% | 6.0% | 6.0% | 6.1% | 7.7% | 99.2% | 99.6% |
+| cloud meets analytics limit w.p. 0.5 | 0.1718 | 239.3% | 7.0% | 7.0% | 27.4% | 24.1% | 229.1% | 214.8% |
+
+## Large4-3C, 2M training steps (revision)
+
+| Reward | SLA cost | Above optimum | Above optimum at 200k | p vs 200k (Holm) | Beats node sets |
+|---|---|---|---|---|---|
+| weighted | 0.1567 [0.1461, 0.1690] | 101.8% | 75.8% | 0.071 | 0/10 |
+| corrected | 0.1356 [0.1279, 0.1433] | 74.5% | 68.2% | 0.315 | 0/10 |
+
+## PPO-Lagrangian, targets = miss rates of the optimum (revision)
+
+| System | Step size | SLA cost | Above optimum | Seeds meeting all targets | p vs weighted PPO (Holm) | Final multipliers |
+|---|---|---|---|---|---|---|
+| nominal | 1.0 | 0.2863 [0.2804, 0.2929] | 9.5% | 1/10 | 0.739 | 13.69, 2.00 |
+| large4_3c | 0.1 | 0.1304 [0.1192, 0.1428] | 67.8% | 0/10 | 0.705 | 11.00, 4.72, 1.00 |
+
+## Runtimes (Intel(R) Core(TM) Ultra 9 185H, one core)
+
+| System | DP solve (s) | Exact evaluation (s) | PPO steps | PPO training (min) |
+|---|---|---|---|---|
+| Nominal | 0.00 | 0.00 | 100,352 | 0.6 |
+| Hetero3 | 0.02 | 0.01 | 100,352 | 0.6 |
+| Hetero3-3C | 0.02 | 0.01 | 100,352 | 0.6 |
+| Large4-3C | 0.26 | 0.13 | 200,704 | 1.2 |

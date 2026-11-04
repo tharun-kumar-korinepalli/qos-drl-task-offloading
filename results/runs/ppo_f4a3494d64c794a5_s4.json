@@ -69,45 +69,43 @@
   "init_from": "ppo_c1b81e1e6b620bf0_s4.zip"
  },
  "tag": "shift slower tasks (+5 ms per queued task) weighted",
- "train_seconds": 27.584436416625977,
+ "train_seconds": 15.991694211959839,
+ "learn_seconds_without_curve": 15.975231170654297,
+ "curve_seconds": 0.0,
  "timesteps_done": 125952,
  "curve": [],
  "versions": {
-  "python": "3.13.16",
+  "python": "3.11.18",
   "numpy": "2.4.4",
   "gymnasium": "1.3.0",
   "stable_baselines3": "2.9.0",
   "torch": "2.14.0+cu130",
-  "platform": "Linux-6.18.44-fc-v114-x86_64-with-glibc2.39"
+  "platform": "Linux-7.0.0-1017-oem-x86_64-with-glibc2.43"
  },
  "exact": {
   "miss": [
-   0.03074376585377884,
-   0.1384399150120668
+   0.02562228828449905,
+   0.149657034505367
   ],
   "latency": [
-   38.96204044894966,
-   45.4238093984469
+   38.28739590466733,
+   45.72948067791954
   ],
-  "overall": 0.08459184043292282,
-  "cost": 0.292158744280961,
-  "edge": 0.9154081595670769
+  "overall": 0.08763966139493302,
+  "cost": 0.27776847592786225,
+  "edge": 0.9123603386050689
  },
- "expected_return": 122.95804624856476,
+ "expected_return": 125.16557930754256,
  "mc": {
   "miss": [
-   0.032007179180376905,
-   0.14752783070905626
+   0.02622395054342407,
+   0.16146825794804934
   ],
-  "cost": 0.3075637266109408,
-  "edge": 0.9104,
-  "overall": 0.0896,
+  "cost": 0.2925880106651697,
+  "edge": 0.90635,
+  "overall": 0.09365,
   "episodes": 100,
-  "cost_se": 0.013523623082827294
+  "cost_se": 0.012584955710328591
  },
- "final_penalties": [
-  10.0,
-  2.0
- ],
- "wall_seconds": 37.28187656402588
+ "wall_seconds": 20.27542495727539
 }

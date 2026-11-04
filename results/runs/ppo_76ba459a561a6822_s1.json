@@ -69,45 +69,43 @@
   "init_from": "ppo_11eced54672ad4bc_s1.zip"
  },
  "tag": "shift random background (Bernoulli 0.2) flat",
- "train_seconds": 28.953754663467407,
+ "train_seconds": 32.96314215660095,
+ "learn_seconds_without_curve": 32.93692946434021,
+ "curve_seconds": 0.0,
  "timesteps_done": 125952,
  "curve": [],
  "versions": {
-  "python": "3.13.16",
+  "python": "3.11.18",
   "numpy": "2.4.4",
   "gymnasium": "1.3.0",
   "stable_baselines3": "2.9.0",
   "torch": "2.14.0+cu130",
-  "platform": "Linux-6.18.44-fc-v114-x86_64-with-glibc2.39"
+  "platform": "Linux-7.0.0-1017-oem-x86_64-with-glibc2.43"
  },
  "exact": {
   "miss": [
-   0.11369332633596223,
-   0.020476630083572187
+   0.12573601751479394,
+   0.005503485165044679
   ],
   "latency": [
-   44.645502280052696,
-   44.712001507078
+   45.6214634750863,
+   44.6149975343065
   ],
-  "overall": 0.06708497820976721,
-  "cost": 0.5889432617633833,
-  "edge": 0.9336203746118242
+  "overall": 0.0656197513399193,
+  "cost": 0.6341835727390144,
+  "edge": 0.9352849902158401
  },
- "expected_return": 104.7534379985631,
+ "expected_return": 106.8380479284305,
  "mc": {
   "miss": [
-   0.11384646302250803,
-   0.018610668789808917
+   0.12510048231511253,
+   0.004777070063694267
   ],
-  "cost": 0.587842983902349,
-  "edge": 0.93465,
-  "overall": 0.066,
+  "cost": 0.630279481639257,
+  "edge": 0.9361,
+  "overall": 0.06465,
   "episodes": 100,
-  "cost_se": 0.023813037309309303
+  "cost_se": 0.025915966123754276
  },
- "final_penalties": [
-  6.0,
-  6.0
- ],
- "wall_seconds": 38.701987981796265
+ "wall_seconds": 38.19305205345154
 }

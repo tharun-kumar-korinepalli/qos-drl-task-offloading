@@ -102,6 +102,8 @@ class OffloadingEnv(gym.Env):
         self.pen = np.array(reward.effective_penalties(system))
         self.lam = self.pen.copy()
         self.hist = [[] for _ in range(self.K)]
+        self.block_n = np.zeros(self.K)
+        self.block_m = np.zeros(self.K)
         hi = [system.cap] * self.N + [self.K - 1, 1]
         lo = [0] * (self.N + 2)
         if self.risk:
@@ -176,9 +178,30 @@ class OffloadingEnv(gym.Env):
         if len(self.hist[c]) > self.rw.window:
             self.hist[c].pop(0)
 
+    def lagrange_update(self):
+        """PPO-Lagrangian dual step, called once per PPO rollout block.
+
+        lam_c <- max(0, lam_c + eta * (v_hat_c - target_c)) for every constrained class
+        (all classes except the last, least critical one). v_hat_c is the miss rate of
+        class c in the block that was just collected. The block counters are then reset.
+        """
+        rw = self.rw
+        n, m = self.block_n, self.block_m
+        v_hat = np.divide(m, n, out=np.zeros(self.K), where=n > 0)
+        for c, target in enumerate(rw.target):
+            if n[c] > 0:
+                self.lam[c] = max(0.0, self.lam[c] + rw.eta * (v_hat[c] - target))
+        self.block_n = np.zeros(self.K)
+        self.block_m = np.zeros(self.K)
+        return v_hat.tolist(), self.lam.tolist()
+
     def _reward(self, a, c, miss):
         rw = self.rw
-        if rw.kind == "tiered_adaptive":
+        if rw.kind == "lagrangian":
+            pen = self.lam[c]
+            self.block_n[c] += 1
+            self.block_m[c] += 1.0 if miss else 0.0
+        elif rw.kind == "tiered_adaptive":
             pen = self.lam[c]
             self._remember(c, miss)
             self.lam[c] = max(0.0, self.lam[c] + rw.eta * (float(np.mean(self.hist[c])) - rw.target[c]))

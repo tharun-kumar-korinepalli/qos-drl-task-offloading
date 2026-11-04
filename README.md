@@ -12,7 +12,7 @@ qos_offloading/
   training.py   training, exact scoring of trained agents, simulation
   study.py      systems, rewards and experiment grids
   stats.py      bootstrap intervals and statistical tests
-scripts/        run, analyze and plot
+scripts/        run, analyze and plot (analyze_revision.py and runtimes.py for the revision)
 tests/
 results/        trained agents and summaries
 figures/      paper figures; Fig. 1 and 2 are TikZ sources (.tex)
@@ -42,6 +42,7 @@ python scripts/dp_scaling.py
 python scripts/analyze.py
 python scripts/report.py
 python scripts/figures.py
+python scripts/analyze_revision.py
 ```
 
 `scripts/figures.py` draws Fig. 3 to 5 of the paper. The two diagrams, Fig. 1 and Fig. 2, are built with LaTeX:
@@ -59,6 +60,29 @@ python scripts/run.py all 0/2 & python scripts/run.py all 1/2 & wait
 ```
 
 Finished runs are cached, so a stopped run continues where it left off. All runs take about 12 hours on two cores.
+
+## Revision experiments
+
+Three additions answer the reviewers. They reuse every stored run, so only the new runs are trained.
+
+| Stage | What it runs | Runs | Approx. cost |
+|---|---|---|---|
+| `lagrange_tune` | PPO-Lagrangian, step size 0.1, 1 or 10, tuning seeds 100 and 101, nominal and Large4-3C | 12 | 1 core-hour |
+| `lagrange` | PPO-Lagrangian with the chosen step size, seeds 0 to 9, nominal (100k steps) and Large4-3C (200k steps) | 20 | 2 core-hours |
+| `long` | Weighted and corrected PPO in Large4-3C for 2M steps, seeds 0 to 9, scored every 50k steps | 20 | 15 core-hours |
+
+The PPO-Lagrangian agent treats every class except the least critical one as a constraint, with the miss rates of the exact optimum as targets, so the targets can always be met. After each PPO rollout block, each multiplier takes one dual step, lambda_c = max(0, lambda_c + eta (v_hat_c - target_c)). The step size is chosen by the exact SLA cost on the tuning seeds.
+
+Run them with one shard per core, then measure the runtimes and print the numbers for the paper:
+
+```
+python scripts/run.py revision 0/4 & python scripts/run.py revision 1/4 & \
+python scripts/run.py revision 2/4 & python scripts/run.py revision 3/4 & wait
+python scripts/runtimes.py
+python scripts/analyze_revision.py
+```
+
+`analyze_revision.py` writes `results/summary/revision.json` and prints every value that the paper reports for these experiments. `runtimes.py` writes `results/summary/runtimes.json` with the CPU model, the DP solve and evaluation time, and the time to train one PPO agent per system. New run records also store `learn_seconds_without_curve`, the training time without the exact scoring of the learning curve.
 
 ## Systems
 
@@ -80,3 +104,4 @@ Each step one task arrives. The agent sees the queue lengths, the class of the t
 
 1. Shilpa Golla
 2. Tharun Kumar Korine Palli
+3. Urmila Bandaru

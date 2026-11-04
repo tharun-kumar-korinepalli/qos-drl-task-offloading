@@ -6,7 +6,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from qos_offloading import study as S
 from qos_offloading.training import execute, load
 
-STAGES = ["tune", "main", "systems_nominal_setting", "system_tune", "systems", "shifts", "published"]
+STAGES = ["tune", "main", "systems_nominal_setting", "system_tune", "systems", "shifts", "published",
+          "lagrange_tune", "lagrange", "long"]
+REVISION = ["lagrange_tune", "lagrange", "long"]
 
 
 def run_stage(jobs, shard, nshard):
@@ -44,9 +46,19 @@ def main(stages, shard, nshard):
         run_stage(S.shift_jobs(best, main_jobs).values(), shard, nshard)
     if "published" in stages:
         run_stage(S.published_jobs(best).values(), shard, nshard)
+    if any(s in stages for s in REVISION):
+        best_sys = wait(S.select_system_configs)
+    if "lagrange_tune" in stages:
+        run_stage(S.lagrange_tune_jobs(best, best_sys).values(), shard, nshard)
+    if "lagrange" in stages:
+        etas = wait(lambda ld: S.select_lagrange_eta(best, best_sys, ld))
+        run_stage(S.lagrange_jobs(best, best_sys, etas).values(), shard, nshard)
+    if "long" in stages:
+        run_stage(S.long_jobs(best_sys).values(), shard, nshard)
 
 
 if __name__ == "__main__":
-    stages = sys.argv[1].split(",") if len(sys.argv) > 1 and sys.argv[1] != "all" else STAGES
+    arg = sys.argv[1] if len(sys.argv) > 1 else "all"
+    stages = STAGES if arg == "all" else REVISION if arg == "revision" else arg.split(",")
     shard, nshard = (int(x) for x in (sys.argv[2] if len(sys.argv) > 2 else "0/1").split("/"))
     main(stages, shard, nshard)

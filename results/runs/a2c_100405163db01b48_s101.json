@@ -69,16 +69,18 @@
   "init_from": ""
  },
  "tag": "tune a2c cfg3 flat",
- "train_seconds": 80.86677956581116,
+ "train_seconds": 17.39725685119629,
+ "learn_seconds_without_curve": 16.532602787017822,
+ "curve_seconds": 0.0,
  "timesteps_done": 50016,
  "curve": [],
  "versions": {
-  "python": "3.13.16",
+  "python": "3.11.18",
   "numpy": "2.4.4",
   "gymnasium": "1.3.0",
   "stable_baselines3": "2.9.0",
   "torch": "2.14.0+cu130",
-  "platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39"
+  "platform": "Linux-7.0.0-1017-oem-x86_64-with-glibc2.43"
  },
  "exact": {
   "miss": [
@@ -86,8 +88,8 @@
    0.1440243903847261
   ],
   "latency": [
-   61.50383543828907,
-   61.50383543828907
+   61.50383543828906,
+   61.50383543828906
   ],
   "overall": 0.3311176491248073,
   "cost": 2.735078929709169,
@@ -96,18 +98,14 @@
  "expected_return": -263.56470877473043,
  "mc": {
   "miss": [
-   0.5676538039684914,
+   0.567454382291355,
    0.16888978036305285
   ],
-  "cost": 3.00715880020551,
+  "cost": 3.006161691819828,
   "edge": 1.0,
-  "overall": 0.36885,
+  "overall": 0.36875,
   "episodes": 100,
-  "cost_se": 0.1315214470852955
+  "cost_se": 0.13145353563781909
  },
- "final_penalties": [
-  6.0,
-  6.0
- ],
- "wall_seconds": 92.56800866127014
+ "wall_seconds": 21.011775732040405
 }

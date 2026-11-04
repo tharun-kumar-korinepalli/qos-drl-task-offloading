@@ -69,45 +69,43 @@
   "init_from": "ppo_630e6d7bf978673e_s7.zip"
  },
  "tag": "shift cloud meets analytics limit w.p. 0.5 weighted",
- "train_seconds": 29.09287667274475,
+ "train_seconds": 17.64284372329712,
+ "learn_seconds_without_curve": 17.626055002212524,
+ "curve_seconds": 0.0,
  "timesteps_done": 125952,
  "curve": [],
  "versions": {
-  "python": "3.13.16",
+  "python": "3.11.18",
   "numpy": "2.4.4",
   "gymnasium": "1.3.0",
   "stable_baselines3": "2.9.0",
   "torch": "2.14.0+cu130",
-  "platform": "Linux-6.18.44-fc-v114-x86_64-with-glibc2.39"
+  "platform": "Linux-7.0.0-1017-oem-x86_64-with-glibc2.43"
  },
  "exact": {
   "miss": [
-   0.03348853620317856,
-   0.06621393218973984
+   0.02805454191419684,
+   0.07222965899770334
   ],
   "latency": [
-   37.665308794722144,
-   44.0979000128147
+   37.0224444858373,
+   44.58877419055213
   ],
-  "overall": 0.0498512341964592,
-  "cost": 0.2336566132056326,
-  "edge": 0.9170417997086708
+  "overall": 0.05014210045595009,
+  "cost": 0.21250236856868754,
+  "edge": 0.9137430700451996
  },
- "expected_return": 141.63926651375485,
+ "expected_return": 145.7459675959766,
  "mc": {
   "miss": [
-   0.03369543351438342,
-   0.0658182541260688
+   0.0292590373477132,
+   0.07430402563589025
   ],
-  "cost": 0.2342954216979859,
-  "edge": 0.9172,
-  "overall": 0.04985,
+  "cost": 0.22059921237445626,
+  "edge": 0.91225,
+  "overall": 0.05175,
   "episodes": 100,
-  "cost_se": 0.011039152220250845
+  "cost_se": 0.011257595113128845
  },
- "final_penalties": [
-  10.0,
-  2.0
- ],
- "wall_seconds": 38.82291507720947
+ "wall_seconds": 22.74612808227539
 }

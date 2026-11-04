@@ -72,31 +72,33 @@
   "init_from": ""
  },
  "tag": "published full eta0.01",
- "train_seconds": 158.10679650306702,
+ "train_seconds": 101.18407988548279,
+ "learn_seconds_without_curve": 101.1790030002594,
+ "curve_seconds": 0.0,
  "timesteps_done": 100352,
  "curve": [],
  "versions": {
-  "python": "3.13.16",
+  "python": "3.11.18",
   "numpy": "2.4.4",
   "gymnasium": "1.3.0",
   "stable_baselines3": "2.9.0",
   "torch": "2.14.0+cu130",
-  "platform": "Linux-6.18.44-fc-v114-x86_64-with-glibc2.39"
+  "platform": "Linux-7.0.0-1017-oem-x86_64-with-glibc2.43"
  },
  "mc": {
   "miss": [
-   0.09136043706258848,
-   0.029289626256344414
+   0.06583853408569776,
+   0.06415631833410235
   ],
-  "cost": 0.48609181156928677,
-  "edge": 0.93958,
-  "overall": 0.06042,
+  "cost": 0.3933489887625911,
+  "edge": 0.935,
+  "overall": 0.065,
   "episodes": 500,
-  "cost_se": 0.009818501028112011
+  "cost_se": 0.008038817219956931
  },
  "final_penalties": [
-  29.07969873833018,
-  19.040216218585208
+  30.160198738333413,
+  15.450516218584825
  ],
- "wall_seconds": 243.49499988555908
+ "wall_seconds": 140.55525135993958
 }

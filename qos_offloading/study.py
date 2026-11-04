@@ -156,3 +156,73 @@ def shift_jobs(best, main):
     return {(shift, r, s): _job("ppo", sp, rewards_for(sp)[r], best[("ppo", r)]["config"], s, SHIFT_STEPS,
                                 init_from=main[("ppo", r, s)].name() + ".zip", tag=f"shift {shift} {r}")
             for shift, sp in SHIFTS.items() for r in ["weighted", "flat"] for s in SEEDS}
+
+
+# ---------------------------------------------------------------------------
+# Revision experiments (reviewer issues 3 and 4)
+# ---------------------------------------------------------------------------
+LONG_STEPS = 2_000_000          # ten times the Large4-3C budget; 2,000,896 with full 2,048-step blocks
+LONG_CURVE_EVERY = 50_000
+LAGRANGE_ETAS = [0.1, 1.0, 10.0]
+LAGRANGE_SYSTEMS = {"nominal": NOMINAL, "large4_3c": SYSTEMS["large4_3c"]}
+LAGRANGE_STEPS = {"nominal": MAIN_STEPS, "large4_3c": SYSTEM_STEPS["large4_3c"]}
+_TARGET_CACHE = {}
+
+
+def optimum_miss(name):
+    """Per-class miss rates of the exact optimum, rounded so that job keys are stable."""
+    if name not in _TARGET_CACHE:
+        from .exact import ExactModel
+        sp = LAGRANGE_SYSTEMS[name]
+        m = ExactModel(sp)
+        miss = m.evaluate(m.solve(m.cost_eval())[0])["miss"]
+        _TARGET_CACHE[name] = tuple(round(float(x), 6) for x in miss)
+    return _TARGET_CACHE[name]
+
+
+def lagrangian_reward(name, eta):
+    """Every class except the last (least critical) is a constraint v_c <= v_c of the optimum."""
+    sp = LAGRANGE_SYSTEMS[name]
+    return Reward(kind="lagrangian", penalties=tuple(sp.eval_weights), target=optimum_miss(name)[:-1], eta=eta)
+
+
+def _lagrange_config(name, best, best_sys):
+    # PPO setting of the weighted reward in that system (nominal tuning, or per-system tuning)
+    return best[("ppo", "weighted")]["config"] if name == "nominal" else best_sys[(name, "weighted")]["config"]
+
+
+def long_jobs(best_sys):
+    sp = SYSTEMS["large4_3c"]
+    cfg = best_sys[("large4_3c", "weighted")]["config"]
+    rw = rewards_for(sp)
+    return {("large4_3c", r, s): _job("ppo", sp, rw[r], cfg, s, LONG_STEPS, curve_every=LONG_CURVE_EVERY,
+                                      tag=f"long large4_3c {r}")
+            for r in ["weighted", "corrected"] for s in SEEDS}
+
+
+def lagrange_tune_jobs(best, best_sys):
+    return {(name, eta, s): _job("ppo", sp, lagrangian_reward(name, eta), _lagrange_config(name, best, best_sys), s,
+                                 LAGRANGE_STEPS[name], tag=f"lagrange tune {name} eta{eta}")
+            for name, sp in LAGRANGE_SYSTEMS.items() for eta in LAGRANGE_ETAS for s in TUNE_SEEDS}
+
+
+def select_lagrange_eta(best, best_sys, load):
+    """The return changes with the multipliers, so eta is chosen by the exact SLA cost on the tuning seeds."""
+    jobs, out = lagrange_tune_jobs(best, best_sys), {}
+    for name in LAGRANGE_SYSTEMS:
+        scores = []
+        for eta in LAGRANGE_ETAS:
+            recs = [load(jobs[(name, eta, s)]) for s in TUNE_SEEDS]
+            if any(r is None for r in recs):
+                return None
+            scores.append((float(np.mean([r["exact"]["cost"] for r in recs])), eta))
+        cost, eta = min(scores)
+        out[name] = {"eta": eta, "tune_cost": cost, "all": scores}
+    return out
+
+
+def lagrange_jobs(best, best_sys, etas):
+    return {(name, s): _job("ppo", sp, lagrangian_reward(name, etas[name]["eta"]),
+                            _lagrange_config(name, best, best_sys), s, LAGRANGE_STEPS[name],
+                            curve_every=CURVE_EVERY if name == "nominal" else 20_000, tag=f"lagrange {name}")
+            for name, sp in LAGRANGE_SYSTEMS.items() for s in SEEDS}

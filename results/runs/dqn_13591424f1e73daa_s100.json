@@ -59,16 +59,18 @@
   "init_from": ""
  },
  "tag": "tune dqn cfg0 flat",
- "train_seconds": 68.13195872306824,
+ "train_seconds": 35.87599158287048,
+ "learn_seconds_without_curve": 35.86720585823059,
+ "curve_seconds": 0.0,
  "timesteps_done": 50000,
  "curve": [],
  "versions": {
-  "python": "3.13.16",
+  "python": "3.11.18",
   "numpy": "2.4.4",
   "gymnasium": "1.3.0",
   "stable_baselines3": "2.9.0",
   "torch": "2.14.0+cu130",
-  "platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39"
+  "platform": "Linux-7.0.0-1017-oem-x86_64-with-glibc2.43"
  },
  "exact": {
   "miss": [
@@ -95,9 +97,5 @@
   "episodes": 100,
   "cost_se": 0.022164322212004713
  },
- "final_penalties": [
-  6.0,
-  6.0
- ],
- "wall_seconds": 75.35666561126709
+ "wall_seconds": 39.78822469711304
 }
