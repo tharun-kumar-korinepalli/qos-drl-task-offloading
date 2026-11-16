@@ -1,0 +1,111 @@
+{
+ "key": "d0ae68f5fb671570",
+ "spec": {
+  "algo": "ppo",
+  "sys": {
+   "base_ms": [
+    30.0,
+    30.0
+   ],
+   "slope_ms": [
+    15.0,
+    15.0
+   ],
+   "drain": [
+    0.6,
+    0.6
+   ],
+   "cap": 8,
+   "class_probs": [
+    0.5,
+    0.5
+   ],
+   "limits_ms": [
+    50.0,
+    90.0
+   ],
+   "eval_weights": [
+    10.0,
+    2.0
+   ],
+   "cloud_ms": 110.0,
+   "cloud_meet": [
+    0.0,
+    0.5
+   ],
+   "background": 0.2,
+   "background_mode": "deterministic",
+   "max_steps": 200
+  },
+  "reward": {
+   "kind": "flat",
+   "penalties": [
+    10.0,
+    2.0
+   ],
+   "success": 1.0,
+   "cloud_cost": 0.1,
+   "scale": 1.0,
+   "target": [],
+   "eta": 0.0,
+   "window": 200
+  },
+  "seed": 0,
+  "timesteps": 25000,
+  "algo_kwargs": {
+   "batch_size": 128,
+   "ent_coef": 0.0,
+   "gamma": 0.99,
+   "learning_rate": 0.001,
+   "n_steps": 1024,
+   "net_arch": [
+    128,
+    128
+   ]
+  },
+  "curve_every": 0,
+  "svrs": false,
+  "prune": false,
+  "init_from": "ppo_4972dbf5bdd04c89_s0.zip"
+ },
+ "tag": "shift cloud meets analytics limit w.p. 0.5 flat",
+ "train_seconds": 19.141454935073853,
+ "learn_seconds_without_curve": 19.132301807403564,
+ "curve_seconds": 0.0,
+ "timesteps_done": 125952,
+ "curve": [],
+ "versions": {
+  "python": "3.11.18",
+  "numpy": "2.4.4",
+  "gymnasium": "1.3.0",
+  "stable_baselines3": "2.9.0",
+  "torch": "2.14.0+cu130",
+  "platform": "Linux-7.0.0-1017-oem-x86_64-with-glibc2.43"
+ },
+ "exact": {
+  "miss": [
+   0.09694270051008017,
+   0.011391936006248911
+  ],
+  "latency": [
+   44.004884304557145,
+   40.296942878852775
+  ],
+  "overall": 0.05416731825816454,
+  "cost": 0.49610543855664974,
+  "edge": 0.9401367137387114
+ },
+ "expected_return": 122.96848871334399,
+ "mc": {
+  "miss": [
+   0.1059220985691574,
+   0.013788244766505637
+  ],
+  "cost": 0.5433987376122926,
+  "edge": 0.9341,
+  "overall": 0.06015,
+  "episodes": 100,
+  "cost_se": 0.022195000919283846
+ },
+ "wall_seconds": 25.851998805999756
+}

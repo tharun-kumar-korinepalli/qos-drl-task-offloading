@@ -1,0 +1,118 @@
+{
+ "key": "ff37b7ef6395478e",
+ "spec": {
+  "algo": "ppo",
+  "sys": {
+   "base_ms": [
+    30.0,
+    30.0
+   ],
+   "slope_ms": [
+    15.0,
+    15.0
+   ],
+   "drain": [
+    0.6,
+    0.6
+   ],
+   "cap": 8,
+   "class_probs": [
+    0.5,
+    0.5
+   ],
+   "limits_ms": [
+    50.0,
+    90.0
+   ],
+   "eval_weights": [
+    10.0,
+    2.0
+   ],
+   "cloud_ms": 110.0,
+   "cloud_meet": [
+    0.0,
+    0.0
+   ],
+   "background": 0.2,
+   "background_mode": "deterministic",
+   "max_steps": 200
+  },
+  "reward": {
+   "kind": "tiered_adaptive",
+   "penalties": [
+    10.0,
+    2.0
+   ],
+   "success": 1.0,
+   "cloud_cost": 0.1,
+   "scale": 1.0,
+   "target": [
+    0.05,
+    0.05
+   ],
+   "eta": 0.01,
+   "window": 200
+  },
+  "seed": 5,
+  "timesteps": 100000,
+  "algo_kwargs": {
+   "batch_size": 128,
+   "ent_coef": 0.0,
+   "gamma": 0.99,
+   "learning_rate": 0.001,
+   "n_steps": 1024,
+   "net_arch": [
+    128,
+    128
+   ]
+  },
+  "curve_every": 0,
+  "svrs": false,
+  "prune": false,
+  "init_from": ""
+ },
+ "tag": "published adaptive_only eta0.01",
+ "train_seconds": 56.58763599395752,
+ "learn_seconds_without_curve": 56.580955505371094,
+ "curve_seconds": 0.0,
+ "timesteps_done": 100352,
+ "curve": [],
+ "versions": {
+  "python": "3.11.18",
+  "numpy": "2.4.4",
+  "gymnasium": "1.3.0",
+  "stable_baselines3": "2.9.0",
+  "torch": "2.14.0+cu130",
+  "platform": "Linux-7.0.0-1017-oem-x86_64-with-glibc2.43"
+ },
+ "exact": {
+  "miss": [
+   0.06575901224475425,
+   0.06566382748168598
+  ],
+  "latency": [
+   41.423259887489465,
+   41.418500649827045
+  ],
+  "overall": 0.06571141986322011,
+  "cost": 0.3944588887054572,
+  "edge": 0.9342885801416894
+ },
+ "expected_return": 106.65170988909834,
+ "mc": {
+  "miss": [
+   0.07109382789909263,
+   0.0712064988466553
+  ],
+  "cost": 0.42667563834211847,
+  "edge": 0.92885,
+  "overall": 0.07115,
+  "episodes": 100,
+  "cost_se": 0.01846361754818971
+ },
+ "final_penalties": [
+  43.21863390267784,
+  24.226063610898034
+ ],
+ "wall_seconds": 61.41957211494446
+}
